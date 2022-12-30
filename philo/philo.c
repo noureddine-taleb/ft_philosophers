@@ -6,7 +6,7 @@
 /*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 13:04:27 by ntaleb            #+#    #+#             */
-/*   Updated: 2022/12/30 13:40:49 by ntaleb           ###   ########.fr       */
+/*   Updated: 2022/12/30 20:14:07 by ntaleb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,18 +133,17 @@ int	philo_eat(t_philo *philo)
 		msleep(state->time_to_eat);
 		ret = 0;
 	}
-	pthread_mutex_unlock(&philo->forks[philo->first_fork]->lock);
 	pthread_mutex_unlock(&philo->forks[!philo->first_fork]->lock);
+	pthread_mutex_unlock(&philo->forks[philo->first_fork]->lock);
 	philo->ms_last_meal = mstime();
 	if (ret < 0)
 	{
-		msleep(10);
 		philo_log(state, "died", start, philo->id);
 		exit(1);
 	}
 	return (0);
 }
-
+// TODO: check if the philo will die during an activity
 void	philo_sleep(t_philo *philo)
 {
 	t_state *state;
@@ -160,8 +159,8 @@ void	philo_think(t_philo *philo)
 
 	state = philo->state;
 	philo_log(state, "is thinking", mstime(), philo->id);
-	// TODO: this is to be calculated
-	msleep(1);
+	// TODO: this is to be calculated in a better way
+	msleep(state->time_to_die - state->time_to_sleep);
 }
 
 void print_state(t_state *state)
