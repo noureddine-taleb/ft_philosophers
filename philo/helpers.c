@@ -6,7 +6,7 @@
 /*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 10:35:16 by ntaleb            #+#    #+#             */
-/*   Updated: 2022/12/31 12:32:56 by ntaleb           ###   ########.fr       */
+/*   Updated: 2022/12/31 15:07:08 by ntaleb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,9 @@ int safe_index(int i, int len)
 	if (i >= len)
 		return (i % len);
 	i *= -1;
-	i %= (len + 1);
-	if (i == 0)
-		i = 1;
-	return (len - i);
+	i -= 1;
+	i %= len;
+	return (len - 1 - i);
 }
 
 int remaining(t_philo *philo)
