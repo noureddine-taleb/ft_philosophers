@@ -1,5 +1,5 @@
 NAME := philo
-SRCS := philo.c log.c ft_atoi_err.c
+SRCS := philo.c log.c helpers.c work.c init.c ft_atoi_err.c
 CFLAGS = -Wall -Wextra -Werror -pthread
 
 all: $(NAME)
