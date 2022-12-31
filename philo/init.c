@@ -6,7 +6,7 @@
 /*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 13:18:02 by ntaleb            #+#    #+#             */
-/*   Updated: 2022/12/31 13:33:04 by ntaleb           ###   ########.fr       */
+/*   Updated: 2022/12/31 17:11:58 by ntaleb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,9 @@ int	parse_args(char **argv, int argc, t_state *state)
 	}
 	else
 		state->number_of_times_each_philosopher_must_eat = -1;
+	// TODO: to be removed
+	if (state->time_to_die <= state->time_to_eat + state->time_to_sleep)
+		printf("warn:  time to die is not bigger enough\n");
 	return (0);
 }
 
