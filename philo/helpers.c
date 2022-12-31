@@ -6,7 +6,7 @@
 /*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 10:35:16 by ntaleb            #+#    #+#             */
-/*   Updated: 2022/12/31 15:07:08 by ntaleb           ###   ########.fr       */
+/*   Updated: 2022/12/31 16:35:59 by ntaleb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	put_fork(t_philo *philo, int i)
 	pthread_mutex_unlock(&philo->forks[i]->lock);
 }
 
-int	check_death(t_philo *philo, int lock_held)
+int	check_death(t_philo *philo, int first_lock_held, int second_lock_held)
 {
 	long	rem;
 
@@ -71,11 +71,10 @@ int	check_death(t_philo *philo, int lock_held)
 	if (rem <= 0)
 	{
 		philo_log_death(philo);
-		if (lock_held)
-		{
+		if (first_lock_held)
 			put_fork(philo, philo->first_fork);
+		if (second_lock_held)
 			put_fork(philo, !philo->first_fork);
-		}
 		exit(1);
 	}
 	return (rem);

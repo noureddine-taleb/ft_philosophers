@@ -6,7 +6,7 @@
 /*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 13:04:27 by ntaleb            #+#    #+#             */
-/*   Updated: 2022/12/31 13:34:40 by ntaleb           ###   ########.fr       */
+/*   Updated: 2022/12/31 16:29:42 by ntaleb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 // pthread_mutex_destroy, pthread_mutex_lock,
 // pthread_mutex_unlock
 
-// TODO: leaks
 #include "philo.h"
 
 void print_state(t_state *state)
@@ -85,10 +84,5 @@ int main(int argc, char **argv)
 		pthread_join(philos[i].thread, &thread_ret);
 		i++;
 	}
-	// TODO: remove this
-	printf("successfull completion\n");
-	/**
-	 * wait for threads
-	 * deallocate resources
-	*/
+	return (0);
 }

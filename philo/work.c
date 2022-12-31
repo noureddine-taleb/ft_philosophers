@@ -6,7 +6,7 @@
 /*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 13:15:51 by ntaleb            #+#    #+#             */
-/*   Updated: 2022/12/31 16:07:03 by ntaleb           ###   ########.fr       */
+/*   Updated: 2022/12/31 16:37:21 by ntaleb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,16 @@ void	philo_eat(t_philo *philo)
 	t_state			*state;
 
 	state = philo->state;
-	check_death(philo, 0);
+	check_death(philo, 0, 0);
 	get_fork(philo, philo->first_fork);
+	check_death(philo, 1, 0);
 	get_fork(philo, !philo->first_fork);
-	check_death(philo, 1);
+	check_death(philo, 1, 1);
 	__philo_eat(philo);
-	// TODO: meaure how much puting locks takes
 	put_fork(philo, !philo->first_fork);
 	put_fork(philo, philo->first_fork);
 }
 
-// TODO: check if the philo will die during an activity
 void	philo_sleep(t_philo *philo)
 {
 	t_state *state;
