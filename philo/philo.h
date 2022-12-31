@@ -6,7 +6,7 @@
 /*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 13:04:30 by ntaleb            #+#    #+#             */
-/*   Updated: 2022/12/31 16:36:47 by ntaleb           ###   ########.fr       */
+/*   Updated: 2022/12/31 16:43:45 by ntaleb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ unsigned long mstime();
 int safe_index(int i, int len);
 int remaining(t_philo *philo);
 void msleep(int msec);
-int	check_death(t_philo *philo, int first_lock_held, int second_lock_held);
+int	check_death(t_philo *philo);
 int	min(int a, int b);
 
 void	get_fork(t_philo *philo, int i);
