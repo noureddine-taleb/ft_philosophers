@@ -6,38 +6,61 @@
 /*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 13:04:27 by ntaleb            #+#    #+#             */
-/*   Updated: 2022/12/31 16:29:42 by ntaleb           ###   ########.fr       */
+/*   Updated: 2022/12/31 18:11:31 by ntaleb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// memset, printf, malloc, free, write,
-// usleep, gettimeofday, pthread_create,
-// pthread_detach, pthread_join, pthread_mutex_init,
-// pthread_mutex_destroy, pthread_mutex_lock,
-// pthread_mutex_unlock
-
 #include "philo.h"
 
-void print_state(t_state *state)
+void	help(void)
 {
-	printf("state->number_of_philosophers = %d\n", state->number_of_philosophers);
-	printf("state->time_to_die = %d\n", state->time_to_die);
-	printf("state->time_to_eat = %d\n", state->time_to_eat);
-	printf("state->time_to_sleep = %d\n", state->time_to_sleep);
-	printf("state->number_of_times_each_philosopher_must_eat = %d\n", state->number_of_times_each_philosopher_must_eat);
+	printf("./philo number_of_philosophers time_to_die\
+ time_to_eat time_to_sleep [number_of_times_each_philosopher_must_eat]\n");
 }
 
-void print_philo(t_philo *philo)
+int	parse_int(char *str, int *i, int min)
 {
-  printf("philo(%p)->id = %d\n", philo, philo->id);
-  printf("philo(%p)->first_fork = %d\n", philo, philo->first_fork);
-  printf("philo(%p)->ms_last_meal = %lu\n", philo, philo->ms_last_meal);
+	int	err;
+
+	err = 0;
+	*i = ft_atoi_err(str, &err);
+	if (err || *i <= min)
+		return (-1);
+	return (0);
 }
 
-void *philosopher(void *arg)
+/**
+ * TODO: remove warn
+*/
+int	parse_args(char **argv, int argc, t_state *state)
 {
-	t_philo *philo;
-	t_state *state;
+	if (argc < 4)
+		return (help(), -1);
+	if (parse_int(argv[0], &state->number_of_philosophers, 2) < 0)
+		return (printf("number of philosophers should be bigger than 1\n"), -1);
+	if (parse_int(argv[1], &state->time_to_die, 1) < 0)
+		return (printf("time to die should be bigger than 0\n"), -1);
+	if (parse_int(argv[2], &state->time_to_eat, 1) < 0)
+		return (printf("time to eat should be bigger than 0\n"), -1);
+	if (parse_int(argv[3], &state->time_to_sleep, 1) < 0)
+		return (printf("time to sleep should be bigger than 0\n"), -1);
+	if (argc == 5)
+	{
+		if (parse_int(argv[3], &state->min_eat, 1) < 0)
+			return (printf("number of times each philosopher must eat\
+ should be bigger than 0\n"), -1);
+	}
+	else
+		state->min_eat = -1;
+	if (state->time_to_die <= state->time_to_eat + state->time_to_sleep)
+		printf("warn:  time to die is not bigger enough\n");
+	return (0);
+}
+
+void	*philosopher(void *arg)
+{
+	t_philo	*philo;
+	t_state	*state;
 	int		meals_count;
 
 	philo = arg;
@@ -50,15 +73,15 @@ void *philosopher(void *arg)
 		philo->work[1](philo);
 		philo->work[2](philo);
 		meals_count++;
-		if (state->number_of_times_each_philosopher_must_eat != -1
-			&& meals_count >= state->number_of_times_each_philosopher_must_eat)
+		if (state->min_eat != -1
+			&& meals_count >= state->min_eat)
 			return (NULL);
 	}
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_state state;
+	t_state	state;
 	t_fork	*forks;
 	t_philo	*philos;
 	int		i;
@@ -69,7 +92,6 @@ int main(int argc, char **argv)
 		return (1);
 	if (state.number_of_philosophers <= 0)
 		return (0);
-
 	forks = init_forks(&state);
 	philos = init_philos(&state, forks);
 	pthread_mutex_init(&state.display_lock, NULL);
@@ -80,9 +102,6 @@ int main(int argc, char **argv)
 	}
 	i = 0;
 	while (i < state.number_of_philosophers)
-	{
-		pthread_join(philos[i].thread, &thread_ret);
-		i++;
-	}
+		pthread_join(philos[i++].thread, &thread_ret);
 	return (0);
 }
