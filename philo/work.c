@@ -6,7 +6,7 @@
 /*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 13:15:51 by ntaleb            #+#    #+#             */
-/*   Updated: 2022/12/31 13:36:57 by ntaleb           ###   ########.fr       */
+/*   Updated: 2022/12/31 16:07:03 by ntaleb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void __philo_eat(t_philo *philo)
 {
+	philo->ms_last_meal = mstime();
 	philo_log_eat(philo);
 	msleep(philo->state->time_to_eat);
 }
@@ -30,7 +31,7 @@ void __philo_think(t_philo *philo, int max)
 
 	// TODO: this is to be calculated in a better way
 	time_to_think = 1;
-	// time_to_think = philo->state->time_to_die - philo->state->time_to_sleep - 2;
+	// time_to_think = philo->state->time_to_die - philo->state->time_to_eat - philo->state->time_to_sleep;
 	philo_log_think(philo);
 	if (time_to_think >= 0)
 		msleep(min(time_to_think, max));
@@ -49,7 +50,6 @@ void	philo_eat(t_philo *philo)
 	// TODO: meaure how much puting locks takes
 	put_fork(philo, !philo->first_fork);
 	put_fork(philo, philo->first_fork);
-	philo->ms_last_meal = mstime();
 }
 
 // TODO: check if the philo will die during an activity
