@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   state.c                                            :+:      :+:    :+:   */
+/*   control.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/31 17:16:55 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/02 18:03:12 by ntaleb           ###   ########.fr       */
+/*   Created: 2023/01/02 16:42:57 by ntaleb            #+#    #+#             */
+/*   Updated: 2023/01/02 18:02:10 by ntaleb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,24 @@
 # include "philo.h"
 #endif
 
-void	get_fork(t_philo *philo, int i)
+void	*philosopher(void *arg)
 {
-	pthread_mutex_lock(&philo->forks[i]->lock);
-	philo_log_take_fork(philo);
-}
+	t_philo	*philo;
+	t_state	*state;
+	int		meals_count;
 
-void	put_fork(t_philo *philo, int i)
-{
-	pthread_mutex_unlock(&philo->forks[i]->lock);
+	philo = arg;
+	state = philo->state;
+	meals_count = 0;
+	philo->ms_last_meal = mstime();
+	while (1)
+	{
+		philo->work[0](philo);
+		philo->work[1](philo);
+		philo->work[2](philo);
+		meals_count++;
+		if (state->min_eat != -1
+			&& meals_count >= state->min_eat)
+			return (NULL);
+	}
 }

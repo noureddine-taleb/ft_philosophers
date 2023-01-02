@@ -1,30 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   init_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 13:18:02 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/02 18:02:46 by ntaleb           ###   ########.fr       */
+/*   Updated: 2023/01/02 18:08:35 by ntaleb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifdef BONUS
-# include "../philo_bonus/philo_bonus.h"
-#else
-# include "philo.h"
-#endif
+#include "philo_bonus.h"
 
-t_fork	*init_forks(t_state *state)
+t_forks	*init_forks(t_state *state)
 {
-	int		i;
-	t_fork	*forks;
+	sem_t	*sem;
+	t_forks	*forks;
 
-	i = 0;
-	forks = malloc(state->number_of_philosophers * sizeof(t_fork));
-	while (i < state->number_of_philosophers)
-		pthread_mutex_init(&forks[i++].lock, NULL);
+	sem = sem_open(SEM_NAME, O_CREAT | O_EXCL, 0664,
+			state->number_of_philosophers);
+	if (sem == SEM_FAILED)
+		return (__perror("semaphore: forks_sem already exists\n"), NULL);
+	forks = malloc(sizeof (t_forks));
+	forks->sem = sem;
 	return (forks);
 }
 
@@ -45,7 +43,7 @@ void	init_work(t_work work_table[3], int start)
 	}
 }
 
-t_philo	*init_philos(t_state *state, t_fork *forks)
+t_philo	*init_philos(t_state *state, t_forks *forks)
 {
 	int		i;
 	t_philo	*philos;
@@ -54,14 +52,12 @@ t_philo	*init_philos(t_state *state, t_fork *forks)
 	philos = malloc(state->number_of_philosophers * sizeof(t_philo));
 	while (i < state->number_of_philosophers)
 	{
-		philos[i].forks[FORK_RIGHT] = &forks[i];
-		philos[i].forks[FORK_LEFT] = &forks[
-			safe_index(i - 1, state->number_of_philosophers)];
-		philos[i].first_fork = i % 2;
 		philos[i].id = i + 1;
 		philos[i].ms_last_meal = 0;
 		init_work(philos[i].work, i % 3);
 		philos[i].state = state;
+		philos[i].finished = 0;
+		philos[i].forks = forks;
 		i++;
 	}
 	return (philos);

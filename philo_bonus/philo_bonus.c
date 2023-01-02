@@ -1,41 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
+/*   philo_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 13:04:27 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/02 18:03:06 by ntaleb           ###   ########.fr       */
+/*   Updated: 2023/01/02 18:14:04 by ntaleb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifdef BONUS
-# include "../philo_bonus/philo_bonus.h"
-#else
-# include "philo.h"
-#endif
+#include "philo_bonus.h"
+
+void	cleanup(t_forks *forks)
+{
+	sem_close(forks->sem);
+	sem_unlink(SEM_NAME);
+}
 
 int	main(int argc, char **argv)
 {
 	t_state	state;
-	t_fork	*forks;
+	t_forks	*forks;
 	t_philo	*philos;
 	int		i;
-	void	*thread_ret;
+	int		ret;
 
 	i = 0;
 	if (parse_args(argv, argc, &state) < 0)
 		return (1);
 	forks = init_forks(&state);
+	if (!forks)
+		exit(1);
 	philos = init_philos(&state, forks);
 	while (i < state.number_of_philosophers)
 	{
-		pthread_create(&philos[i].thread, NULL, philosopher, &philos[i]);
+		philo_create(&philos[i], &philosopher, &philos[i]);
 		i++;
 	}
-	i = 0;
-	while (i < state.number_of_philosophers)
-		pthread_join(philos[i++].thread, &thread_ret);
-	return (0);
+	ret = wait_philos(philos, &state);
+	cleanup(forks);
+	return (ret);
 }

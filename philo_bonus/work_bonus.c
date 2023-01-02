@@ -1,20 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   work.c                                             :+:      :+:    :+:   */
+/*   work_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 13:15:51 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/02 18:03:18 by ntaleb           ###   ########.fr       */
+/*   Updated: 2023/01/02 18:00:46 by ntaleb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifdef BONUS
-# include "../philo_bonus/philo_bonus.h"
-#else
-# include "philo.h"
-#endif
+#include "philo_bonus.h"
 
 void	philo_eat(t_philo *philo)
 {
@@ -22,13 +18,13 @@ void	philo_eat(t_philo *philo)
 
 	state = philo->state;
 	check_death(philo);
-	get_fork(philo, philo->first_fork);
+	get_fork(philo);
 	check_death(philo);
-	get_fork(philo, !philo->first_fork);
+	get_fork(philo);
 	check_death(philo);
 	__philo_eat(philo);
-	put_fork(philo, !philo->first_fork);
-	put_fork(philo, philo->first_fork);
+	put_fork(philo);
+	put_fork(philo);
 }
 
 void	philo_sleep(t_philo *philo)

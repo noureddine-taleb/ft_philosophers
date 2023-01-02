@@ -6,11 +6,15 @@
 /*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 10:35:16 by ntaleb            #+#    #+#             */
-/*   Updated: 2022/12/31 17:19:11 by ntaleb           ###   ########.fr       */
+/*   Updated: 2023/01/02 18:02:25 by ntaleb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#ifdef BONUS
+# include "../philo_bonus/philo_bonus.h"
+#else
+# include "philo.h"
+#endif
 
 unsigned long	mstime(void)
 {
@@ -42,4 +46,15 @@ int	min(int a, int b)
 	if (a < b)
 		return (a);
 	return (b);
+}
+
+int	parse_int(char *str, int *i, int min)
+{
+	int	err;
+
+	err = 0;
+	*i = ft_atoi_err(str, &err);
+	if (err || *i < min)
+		return (-1);
+	return (0);
 }
