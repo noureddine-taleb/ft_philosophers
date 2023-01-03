@@ -6,7 +6,7 @@
 /*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 13:04:30 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/03 12:37:03 by ntaleb           ###   ########.fr       */
+/*   Updated: 2023/01/03 12:47:04 by ntaleb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,11 @@ typedef struct s_state {
 	pthread_mutex_t	display_lock;
 }	t_state;
 
-struct			s_philo;
-typedef void	(*t_work)(struct s_philo *);
-
 typedef struct s_philo {
 	pid_t			pid;
 	int				finished;
 	int				id;
 	unsigned long	ms_last_meal;
-	// TODO: remove work
-	t_work			work[3];
 	t_state			*state;
 	t_forks			*forks;
 }	t_philo;

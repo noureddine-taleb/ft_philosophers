@@ -6,7 +6,7 @@
 /*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 13:04:30 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/03 12:27:42 by ntaleb           ###   ########.fr       */
+/*   Updated: 2023/01/03 12:45:43 by ntaleb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,12 @@ typedef struct s_state {
 	int				min_eat;
 }	t_state;
 
-struct			s_philo;
-typedef void	(*t_work)(struct s_philo *);
-
 typedef struct s_philo {
 	pthread_t		thread;
 	int				id;
 	t_fork			*forks[2];
 	enum e_fork		first_fork;
 	unsigned long	ms_last_meal;
-	// TODO: remove work
-	t_work			work[3];
 	t_state			*state;
 }	t_philo;
 

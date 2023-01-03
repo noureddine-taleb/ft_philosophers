@@ -6,7 +6,7 @@
 /*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 15:59:34 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/02 18:13:18 by ntaleb           ###   ########.fr       */
+/*   Updated: 2023/01/03 12:46:11 by ntaleb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ int	philosopher(void *arg)
 	philo->ms_last_meal = mstime();
 	while (1)
 	{
-		philo->work[0](philo);
-		philo->work[1](philo);
-		philo->work[2](philo);
+		philo_eat(philo);
+		philo_sleep(philo);
+		philo_think(philo);
 		meals_count++;
 		if (state->min_eat != -1
 			&& meals_count >= state->min_eat)

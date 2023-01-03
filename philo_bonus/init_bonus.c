@@ -6,7 +6,7 @@
 /*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 13:18:02 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/02 18:08:35 by ntaleb           ###   ########.fr       */
+/*   Updated: 2023/01/03 12:46:53 by ntaleb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,23 +26,6 @@ t_forks	*init_forks(t_state *state)
 	return (forks);
 }
 
-void	init_work(t_work work_table[3], int start)
-{
-	int		i;
-	t_work	refwork_table[3];
-
-	refwork_table[0] = philo_eat;
-	refwork_table[1] = philo_sleep;
-	refwork_table[2] = philo_think;
-	i = 0;
-	while (i < 3)
-	{
-		work_table[i] = refwork_table[safe_index(start, 3)];
-		i++;
-		start++;
-	}
-}
-
 t_philo	*init_philos(t_state *state, t_forks *forks)
 {
 	int		i;
@@ -54,7 +37,6 @@ t_philo	*init_philos(t_state *state, t_forks *forks)
 	{
 		philos[i].id = i + 1;
 		philos[i].ms_last_meal = 0;
-		init_work(philos[i].work, i % 3);
 		philos[i].state = state;
 		philos[i].finished = 0;
 		philos[i].forks = forks;
