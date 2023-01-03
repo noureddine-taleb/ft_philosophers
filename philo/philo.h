@@ -6,7 +6,7 @@
 /*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 13:04:30 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/03 12:45:43 by ntaleb           ###   ########.fr       */
+/*   Updated: 2023/01/03 14:38:59 by ntaleb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ typedef struct s_philo {
 	enum e_fork		first_fork;
 	unsigned long	ms_last_meal;
 	t_state			*state;
+	
+	unsigned long __last_activity;
 }	t_philo;
 
 void			philo_log(t_philo *philo, char *event);

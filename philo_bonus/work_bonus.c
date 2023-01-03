@@ -19,9 +19,9 @@ void	philo_eat(t_philo *philo)
 	state = philo->state;
 	check_death(philo);
 	get_fork(philo);
-	check_death(philo);
+	// check_death(philo);
 	get_fork(philo);
-	check_death(philo);
+	// check_death(philo);
 	philo->ms_last_meal = mstime();
 	__philo_eat(philo, philo->ms_last_meal);
 	put_fork(philo);

@@ -6,7 +6,7 @@
 /*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 18:12:44 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/03 12:23:26 by ntaleb           ###   ########.fr       */
+/*   Updated: 2023/01/03 14:57:18 by ntaleb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,5 @@ void	__philo_think(t_philo *philo, int max)
 		- philo->state->time_to_sleep;
 	philo_log_think(philo);
 	if (time_to_think >= 0)
-		msleep(min(time_to_think, max));
+		msleep(min(1, max));
 }

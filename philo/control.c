@@ -6,7 +6,7 @@
 /*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 16:42:57 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/03 12:45:13 by ntaleb           ###   ########.fr       */
+/*   Updated: 2023/01/03 14:42:59 by ntaleb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	*philosopher(void *arg)
 	philo = arg;
 	state = philo->state;
 	meals_count = 0;
-	philo->ms_last_meal = mstime();
+	philo->ms_last_meal = philo->__last_activity = mstime();
 	while (1)
 	{
 		philo_eat(philo);

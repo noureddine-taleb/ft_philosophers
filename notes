@@ -1,1 +1,38 @@
-all philos should start eating at the same time
+reduce time it takes to transition from one state to another
+schedule philos using time_to_think
+print time lost when starting an activity
+
+bonus:
+	remove O_EXCL
+
+1672751257561 3 start eating routine
+1672751257561 3 has taken a fork
+1672751257561 3 has taken a fork
+1672751257561 3 is eating
+1672751257561 1 start eating routine
+1672751257561 1 has taken a fork
+1672751257561 1 has taken a fork
+1672751257561 1 is eating
+1672751257763 4 is thinking
+1672751257763 2 is thinking
+1672751257764 4 start eating routine
+1672751257764 2 start eating routine
+1672751257766 3 is sleeping
+1672751257766 1 is sleeping
+1672751257766 2 has taken a fork
+1672751257766 2 has taken a fork
+1672751257766 2 is eating
+1672751257766 4 has taken a fork
+1672751257766 4 has taken a fork
+1672751257766 4 is eating
+1672751257970 3 is thinking
+1672751257970 1 is thinking
+1672751257970 2 is sleeping
+1672751257970 4 is sleeping
+1672751257972 3 start eating routine
+1672751257972 3 died
+
+./philo 4 410 200 200
+
+eating -> sleeping = loss of 4ms
+sleeping -> thinking = loss of 3ms
