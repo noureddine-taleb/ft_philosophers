@@ -6,7 +6,7 @@
 /*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 18:12:44 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/02 18:03:22 by ntaleb           ###   ########.fr       */
+/*   Updated: 2023/01/03 12:23:26 by ntaleb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,10 @@
 # include "philo.h"
 #endif
 
-void	__philo_eat(t_philo *philo)
+void	__philo_eat(t_philo *philo, int max)
 {
-	philo->ms_last_meal = mstime();
 	philo_log_eat(philo);
-	msleep(philo->state->time_to_eat);
+	msleep(min(philo->state->time_to_eat, max));
 }
 
 void	__philo_sleep(t_philo *philo, int max)

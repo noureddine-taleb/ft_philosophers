@@ -6,7 +6,7 @@
 /*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 13:04:30 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/02 18:12:46 by ntaleb           ###   ########.fr       */
+/*   Updated: 2023/01/03 12:37:03 by ntaleb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_philo {
 	int				finished;
 	int				id;
 	unsigned long	ms_last_meal;
+	// TODO: remove work
 	t_work			work[3];
 	t_state			*state;
 	t_forks			*forks;
@@ -71,7 +72,7 @@ int				parse_int(char *str, int *i, int min);
 void			get_fork(t_philo *philo);
 void			put_fork(t_philo *philo);
 
-void			__philo_eat(t_philo *philo);
+void			__philo_eat(t_philo *philo, int max);
 void			__philo_sleep(t_philo *philo, int max);
 void			__philo_think(t_philo *philo, int max);
 
