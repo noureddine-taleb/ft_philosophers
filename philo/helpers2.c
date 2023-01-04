@@ -52,7 +52,7 @@ int	parse_args(char **argv, int argc, t_state *state)
 		return (__perror("time to sleep should be bigger than 0\n"), -1);
 	if (argc == 5)
 	{
-		if (parse_int(argv[3], &state->min_eat, 1) < 0)
+		if (parse_int(argv[4], &state->min_eat, 1) < 0)
 			return (__perror("number of times each philosopher must eat\
  should be bigger than 0\n"), -1);
 	}
