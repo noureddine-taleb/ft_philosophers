@@ -6,7 +6,7 @@
 /*   By: noureddine <noureddine@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 13:04:30 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/04 16:13:46 by noureddine       ###   ########.fr       */
+/*   Updated: 2023/01/04 20:42:03 by noureddine       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ typedef struct s_philo {
 	enum e_fork		first_fork;
 	unsigned long	ms_last_meal;
 	t_state			*state;
-	// TODO: remove this
-	unsigned long __last_activity;
 }	t_philo;
 
 void			philo_log(t_philo *philo, char *event);

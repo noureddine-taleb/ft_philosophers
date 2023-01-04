@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 13:04:30 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/05 12:15:48 by codespace        ###   ########.fr       */
+/*   Updated: 2023/01/06 15:15:47 by ntaleb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,6 @@ typedef struct s_philo {
 	unsigned long	ms_last_meal;
 	t_state			*state;
 	t_forks			*forks;
-
-	// TODO: remove this
-	unsigned long __last_activity;
 }	t_philo;
 
 void			philo_log(t_philo *philo, char *event);
