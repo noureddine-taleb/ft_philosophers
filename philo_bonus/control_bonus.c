@@ -25,12 +25,12 @@ int	philosopher(void *arg)
 	while (1)
 	{
 		philo_eat(philo);
-		philo_sleep(philo);
-		philo_think(philo);
 		meals_count++;
 		if (state->min_eat != -1
 			&& meals_count >= state->min_eat)
 			return (0);
+		philo_sleep(philo);
+		philo_think(philo);
 	}
 }
 
