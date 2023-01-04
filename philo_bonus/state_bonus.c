@@ -6,7 +6,7 @@
 /*   By: noureddine <noureddine@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 17:16:55 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/04 18:53:51 by noureddine       ###   ########.fr       */
+/*   Updated: 2023/01/04 23:13:28 by noureddine       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,13 @@
 */
 void get_forks(t_philo *philo)
 {
+	pthread_mutex_lock(&philo->state->table_lock);
 	sem_wait(philo->forks->sem);
 	philo_log_take_fork(philo);
 	check_death(philo);
 	sem_wait(philo->forks->sem);
 	philo_log_take_fork(philo);
+	pthread_mutex_unlock(&philo->state->table_lock);
 }
 
 /**

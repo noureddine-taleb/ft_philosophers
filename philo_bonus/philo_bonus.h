@@ -6,7 +6,7 @@
 /*   By: noureddine <noureddine@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 13:04:30 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/04 18:53:51 by noureddine       ###   ########.fr       */
+/*   Updated: 2023/01/04 22:58:14 by noureddine       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <signal.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include <pthread.h>
 
 # define SEM_NAME "forks_sem"
 
@@ -35,6 +36,7 @@ typedef struct s_state {
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				min_eat;
+	pthread_mutex_t	table_lock;
 }	t_state;
 
 typedef struct s_philo {
