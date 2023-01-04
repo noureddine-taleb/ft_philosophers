@@ -6,7 +6,7 @@
 /*   By: noureddine <noureddine@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 17:16:55 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/04 18:39:10 by noureddine       ###   ########.fr       */
+/*   Updated: 2023/01/04 23:58:37 by noureddine       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,16 @@ void get_forks(t_philo *philo)
 	success = 0;
 	while (1)
 	{
-		while (philo->forks[0]->locked || philo->forks[1]->locked)
-			check_death(philo);
-		pthread_mutex_lock(&state->table_lock);
-		if (!philo->forks[0]->locked && !philo->forks[1]->locked)
+		while (philo->forks[FORK_LEFT]->locked || philo->forks[FORK_RIGHT]->locked)
 		{
-			philo->forks[0]->locked = 1;
-			philo->forks[1]->locked = 1;
+			msleep(1);
+			check_death(philo);
+		}
+		pthread_mutex_lock(&state->table_lock);
+		if (!philo->forks[FORK_LEFT]->locked && !philo->forks[FORK_RIGHT]->locked)
+		{
+			philo->forks[FORK_LEFT]->locked = 1;
+			philo->forks[FORK_RIGHT]->locked = 1;
 			success = 1;
 		}
 		pthread_mutex_unlock(&state->table_lock);
