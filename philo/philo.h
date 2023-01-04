@@ -44,7 +44,7 @@ typedef struct s_philo {
 	enum e_fork		first_fork;
 	unsigned long	ms_last_meal;
 	t_state			*state;
-	
+	// TODO: remove this
 	unsigned long __last_activity;
 }	t_philo;
 

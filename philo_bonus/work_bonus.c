@@ -14,9 +14,6 @@
 
 void	philo_eat(t_philo *philo)
 {
-	t_state			*state;
-
-	state = philo->state;
 	check_death(philo);
 	get_fork(philo);
 	// check_death(philo);
@@ -30,20 +27,16 @@ void	philo_eat(t_philo *philo)
 
 void	philo_sleep(t_philo *philo)
 {
-	t_state	*state;
 	int		rem;
 
-	state = philo->state;
 	rem = check_death(philo);
 	__philo_sleep(philo, rem);
 }
 
 void	philo_think(t_philo *philo)
 {
-	t_state	*state;
 	int		rem;
 
-	state = philo->state;
 	rem = check_death(philo);
 	__philo_think(philo, rem);
 }

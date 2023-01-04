@@ -21,6 +21,7 @@
 # include <sys/wait.h>
 # include <signal.h>
 # include <unistd.h>
+# include <fcntl.h>
 
 # define SEM_NAME "forks_sem"
 
@@ -34,7 +35,6 @@ typedef struct s_state {
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				min_eat;
-	pthread_mutex_t	display_lock;
 }	t_state;
 
 typedef struct s_philo {
@@ -44,6 +44,9 @@ typedef struct s_philo {
 	unsigned long	ms_last_meal;
 	t_state			*state;
 	t_forks			*forks;
+
+	// TODO: remove this
+	unsigned long __last_activity;
 }	t_philo;
 
 void			philo_log(t_philo *philo, char *event);
