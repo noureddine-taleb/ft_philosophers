@@ -12,13 +12,24 @@
 
 #include "philo_bonus.h"
 
+sem_t *_sem_open(char *path, int value)
+{
+	sem_t	*sem;
+
+	sem = sem_open(path, O_CREAT | O_EXCL, 0664,
+			value);
+	sem_unlink(path);
+	if (sem == SEM_FAILED)
+		return (sem);
+	return (sem);
+}
+
 t_forks	*init_forks(t_state *state)
 {
 	sem_t	*sem;
 	t_forks	*forks;
 
-	sem = sem_open(SEM_NAME, O_CREAT | O_EXCL, 0664,
-			state->number_of_philosophers);
+	sem = _sem_open(SEM_NAME, state->number_of_philosophers);
 	if (sem == SEM_FAILED)
 		return (__perror("semaphore: forks_sem already exists\n"), NULL);
 	forks = malloc(sizeof (t_forks));

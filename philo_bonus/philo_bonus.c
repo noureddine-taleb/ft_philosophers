@@ -12,12 +12,6 @@
 
 #include "philo_bonus.h"
 
-void	cleanup(t_forks *forks)
-{
-	sem_close(forks->sem);
-	sem_unlink(SEM_NAME);
-}
-
 int	main(int argc, char **argv)
 {
 	t_state	state;
@@ -39,6 +33,5 @@ int	main(int argc, char **argv)
 		i++;
 	}
 	ret = wait_philos(philos, &state);
-	cleanup(forks);
 	return (ret);
 }
