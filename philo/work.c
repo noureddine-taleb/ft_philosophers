@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   work.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
+/*   By: noureddine <noureddine@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 13:15:51 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/03 14:55:53 by ntaleb           ###   ########.fr       */
+/*   Updated: 2023/01/04 16:49:18 by noureddine       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,14 @@
 
 void	philo_eat(t_philo *philo)
 {
+	int		rem;
+
 	check_death(philo);
-	get_fork(philo, philo->first_fork);
-	// check_death(philo);
-	get_fork(philo, !philo->first_fork);
-	// check_death(philo);
+	get_forks(philo);
 	philo->ms_last_meal = mstime();
-	__philo_eat(philo, philo->ms_last_meal);
-	put_fork(philo, !philo->first_fork);
-	put_fork(philo, philo->first_fork);
+	rem = check_death(philo);
+	__philo_eat(philo, rem);
+	put_forks(philo);
 }
 
 void	philo_sleep(t_philo *philo)

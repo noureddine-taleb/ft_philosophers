@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
+/*   By: noureddine <noureddine@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 13:18:02 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/03 12:45:27 by ntaleb           ###   ########.fr       */
+/*   Updated: 2023/01/04 16:03:54 by noureddine       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@ t_fork	*init_forks(t_state *state)
 
 	i = 0;
 	forks = malloc(state->number_of_philosophers * sizeof(t_fork));
+	pthread_mutex_init(&state->table_lock, NULL);
 	while (i < state->number_of_philosophers)
-		pthread_mutex_init(&forks[i++].lock, NULL);
+		forks[i++].locked = 0;
 	return (forks);
 }
 
