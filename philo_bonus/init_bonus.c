@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
+/*   By: noureddine <noureddine@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 13:18:02 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/03 12:46:53 by ntaleb           ###   ########.fr       */
+/*   Updated: 2023/01/04 22:48:01 by noureddine       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ t_forks	*init_forks(t_state *state)
 	sem = _sem_open(SEM_NAME, state->number_of_philosophers);
 	if (sem == SEM_FAILED)
 		return (__perror("semaphore: forks_sem already exists\n"), NULL);
+	pthread_mutex_init(&state->table_lock, NULL);
 	forks = malloc(sizeof (t_forks));
 	forks->sem = sem;
 	return (forks);
