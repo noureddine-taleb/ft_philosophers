@@ -6,7 +6,7 @@
 /*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 13:18:02 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/03 12:45:27 by ntaleb           ###   ########.fr       */
+/*   Updated: 2023/01/07 11:45:36 by ntaleb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@ t_fork	*init_forks(t_state *state)
 
 	i = 0;
 	forks = malloc(state->number_of_philosophers * sizeof(t_fork));
+	pthread_mutex_init(&state->table_lock, NULL);
 	while (i < state->number_of_philosophers)
-		pthread_mutex_init(&forks[i++].lock, NULL);
+		forks[i++].locked = 0;
 	return (forks);
 }
 
@@ -40,7 +41,6 @@ t_philo	*init_philos(t_state *state, t_fork *forks)
 		philos[i].forks[FORK_RIGHT] = &forks[i];
 		philos[i].forks[FORK_LEFT] = &forks[
 			safe_index(i - 1, state->number_of_philosophers)];
-		philos[i].first_fork = i % 2;
 		philos[i].id = i + 1;
 		philos[i].ms_last_meal = 0;
 		philos[i].state = state;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helpers2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
+/*   By: noureddine <noureddine@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 16:10:00 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/03 14:53:22 by ntaleb           ###   ########.fr       */
+/*   Updated: 2023/01/04 18:00:07 by noureddine       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,6 @@ void	help(char *program)
  time_to_eat time_to_sleep [number_of_times_each_philosopher_must_eat]\n");
 }
 
-/**
- * TODO: remove warn
-*/
 int	parse_args(char **argv, int argc, t_state *state)
 {
 	if (--argc < 4)
@@ -58,8 +55,6 @@ int	parse_args(char **argv, int argc, t_state *state)
 	}
 	else
 		state->min_eat = -1;
-	if (state->time_to_die <= state->time_to_eat + state->time_to_sleep)
-		__perror("warn:  time to die is not bigger enough\n");
 	return (0);
 }
 
@@ -68,7 +63,7 @@ int	check_death(t_philo *philo)
 	long	rem;
 
 	rem = remaining(philo);
-	if (rem < 0)
+	if (rem <= 0)
 		exit((philo_log_death(philo), 1));
 	return (rem);
 }

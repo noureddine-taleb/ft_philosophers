@@ -6,7 +6,7 @@
 /*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 13:04:30 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/03 14:38:59 by ntaleb           ###   ########.fr       */
+/*   Updated: 2023/01/08 14:57:35 by ntaleb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ enum e_fork {
 };
 
 typedef struct s_fork {
-	pthread_mutex_t	lock;
+	int	locked;
 }	t_fork;
 
 typedef struct s_state {
@@ -35,13 +35,13 @@ typedef struct s_state {
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				min_eat;
+	pthread_mutex_t	table_lock;
 }	t_state;
 
 typedef struct s_philo {
 	pthread_t		thread;
 	int				id;
 	t_fork			*forks[2];
-	enum e_fork		first_fork;
 	unsigned long	ms_last_meal;
 	t_state			*state;
 	// TODO: remove this
@@ -66,8 +66,8 @@ int				min(int a, int b);
 void			__perror(char *err);
 int				parse_int(char *str, int *i, int min);
 
-void			get_fork(t_philo *philo, int i);
-void			put_fork(t_philo *philo, int i);
+void			get_forks(t_philo *philo);
+void			put_forks(t_philo *philo);
 void			*philosopher(void *arg);
 
 void			__philo_eat(t_philo *philo, int max);
