@@ -6,7 +6,7 @@
 /*   By: noureddine <noureddine@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 15:59:34 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/04 18:53:48 by noureddine       ###   ########.fr       */
+/*   Updated: 2023/01/04 23:22:14 by noureddine       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,7 @@ int	philo_join(t_philo *philos, t_state	*state)
 	int	i;
 
 	i = 0;
-	// TODO: replace this with waitpid
-	pid = wait(&status);
+	pid = waitpid(-1, &status, 0);
 	while (i < state->number_of_philosophers)
 	{
 		if (philos[i].pid == pid)
