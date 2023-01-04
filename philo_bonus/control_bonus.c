@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   control_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
+/*   By: noureddine <noureddine@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 15:59:34 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/03 12:46:11 by ntaleb           ###   ########.fr       */
+/*   Updated: 2023/01/04 18:53:48 by noureddine       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	philo_join(t_philo *philos, t_state	*state)
 	int	i;
 
 	i = 0;
+	// TODO: replace this with waitpid
 	pid = wait(&status);
 	while (i < state->number_of_philosophers)
 	{
