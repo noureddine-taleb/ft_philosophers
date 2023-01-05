@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noureddine <noureddine@student.42.fr>      +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 13:04:30 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/04 22:58:14 by noureddine       ###   ########.fr       */
+/*   Updated: 2023/01/05 12:15:48 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@
 # include <fcntl.h>
 # include <pthread.h>
 
-# define SEM_NAME "forks_sem"
+# define SEM_FORKS_NAME "forks_sem"
+# define SEM_TABLE_NAME "table_sem"
 
 typedef struct s_forks {
 	sem_t	*sem;
@@ -36,7 +37,7 @@ typedef struct s_state {
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				min_eat;
-	pthread_mutex_t	table_lock;
+	sem_t			*table_lock;
 }	t_state;
 
 typedef struct s_philo {

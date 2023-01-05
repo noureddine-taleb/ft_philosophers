@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   work_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noureddine <noureddine@student.42.fr>      +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 13:15:51 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/04 18:53:51 by noureddine       ###   ########.fr       */
+/*   Updated: 2023/01/05 12:19:07 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,13 @@
 
 void	philo_eat(t_philo *philo)
 {
+	int	rem;
+
 	check_death(philo);
 	get_forks(philo);
 	philo->ms_last_meal = mstime();
-	__philo_eat(philo, philo->ms_last_meal);
+	rem = check_death(philo);
+	__philo_eat(philo, rem);
 	put_forks(philo);
 }
 
