@@ -6,7 +6,7 @@
 /*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 18:12:44 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/06 15:02:33 by ntaleb           ###   ########.fr       */
+/*   Updated: 2023/01/07 11:40:23 by ntaleb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,15 @@ void	__philo_sleep(t_philo *philo, int max)
 void	__philo_think(t_philo *philo, int max)
 {
 	int	time_to_think;
-
+#ifdef BONUS
 	time_to_think = philo->state->time_to_die - philo->state->time_to_eat
 		- philo->state->time_to_sleep - 5;
 	philo_log_think(philo);
 	if (time_to_think > 0)
 		msleep(min(time_to_think, max));
+#else
+	msleep(min(1, max));
+#endif
 }
 
 #else
