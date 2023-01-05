@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noureddine <noureddine@student.42.fr>      +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 13:18:02 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/04 22:48:01 by noureddine       ###   ########.fr       */
+/*   Updated: 2023/01/05 12:16:19 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,12 @@ t_forks	*init_forks(t_state *state)
 	sem_t	*sem;
 	t_forks	*forks;
 
-	sem = _sem_open(SEM_NAME, state->number_of_philosophers);
+	sem = _sem_open(SEM_FORKS_NAME, state->number_of_philosophers);
 	if (sem == SEM_FAILED)
-		return (__perror("semaphore: forks_sem already exists\n"), NULL);
-	pthread_mutex_init(&state->table_lock, NULL);
+		return (__perror("semaphore:" SEM_FORKS_NAME " already exists\n"), NULL);
+	state->table_lock = _sem_open(SEM_TABLE_NAME, 1);
+	if (state->table_lock == SEM_FAILED)
+		return (__perror("semaphore:" SEM_TABLE_NAME " already exists\n"), NULL);
 	forks = malloc(sizeof (t_forks));
 	forks->sem = sem;
 	return (forks);
