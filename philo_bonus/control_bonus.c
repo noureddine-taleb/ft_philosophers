@@ -21,7 +21,7 @@ int	philosopher(void *arg)
 	philo = arg;
 	state = philo->state;
 	meals_count = 0;
-	philo->ms_last_meal = mstime();
+	philo->ms_last_meal = philo->__last_activity = mstime();
 	while (1)
 	{
 		philo_eat(philo);
