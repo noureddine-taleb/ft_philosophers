@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noureddine <noureddine@student.42.fr>      +#+  +:+       +#+        */
+/*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 13:04:27 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/04 16:03:54 by noureddine       ###   ########.fr       */
+/*   Updated: 2023/01/06 16:37:18 by ntaleb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	main(int argc, char **argv)
 	t_fork	*forks;
 	t_philo	*philos;
 	int		i;
-	void	*thread_ret;
 
 	i = 0;
 	if (parse_args(argv, argc, &state) < 0)
@@ -36,6 +35,7 @@ int	main(int argc, char **argv)
 	}
 	i = 0;
 	while (i < state.number_of_philosophers)
-		pthread_join(philos[i++].thread, &thread_ret);
+		pthread_detach(philos[i++].thread);
+	pthread_exit(NULL);
 	return (0);
 }
