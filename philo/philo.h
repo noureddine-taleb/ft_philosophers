@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noureddine <noureddine@student.42.fr>      +#+  +:+       +#+        */
+/*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 13:04:30 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/04 20:42:03 by noureddine       ###   ########.fr       */
+/*   Updated: 2023/01/07 11:41:23 by ntaleb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_philo {
 	pthread_t		thread;
 	int				id;
 	t_fork			*forks[2];
+	// TODO: remove this
 	enum e_fork		first_fork;
 	unsigned long	ms_last_meal;
 	t_state			*state;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helpers2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noureddine <noureddine@student.42.fr>      +#+  +:+       +#+        */
+/*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 16:10:00 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/04 18:00:07 by noureddine       ###   ########.fr       */
+/*   Updated: 2023/01/06 18:17:54 by ntaleb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ int	parse_args(char **argv, int argc, t_state *state)
 	if (--argc < 4)
 		return (help(*argv), -1);
 	argv++;
-	if (parse_int(argv[0], &state->number_of_philosophers, 2) < 0)
-		return (__perror("number of philosophers should be bigger than 1\n"),
+	if (parse_int(argv[0], &state->number_of_philosophers, 1) < 0)
+		return (__perror("number of philosophers should be bigger than 0\n"),
 			-1);
 	if (parse_int(argv[1], &state->time_to_die, 1) < 0)
 		return (__perror("time to die should be bigger than 0\n"), -1);
