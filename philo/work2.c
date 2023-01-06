@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   work2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noureddine <noureddine@student.42.fr>      +#+  +:+       +#+        */
+/*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 18:12:44 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/05 00:24:20 by noureddine       ###   ########.fr       */
+/*   Updated: 2023/01/06 15:02:33 by ntaleb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,37 @@ void	__philo_sleep(t_philo *philo, int max)
 	msleep(min(philo->state->time_to_sleep, max));
 }
 
-/**
- * TODO: time to think need a closer investigation
-*/
+#ifdef BONUS
+
 void	__philo_think(t_philo *philo, int max)
 {
 	int	time_to_think;
 
 	time_to_think = philo->state->time_to_die - philo->state->time_to_eat
-		- philo->state->time_to_sleep - 3;
+		- philo->state->time_to_sleep - 5;
 	philo_log_think(philo);
 	if (time_to_think > 0)
 		msleep(min(time_to_think, max));
 }
+
+#else
+
+// void	__philo_think(t_philo *philo, int max)
+// {
+// 	int	time_to_think;
+
+// 	time_to_think = philo->state->time_to_die - philo->state->time_to_eat
+// 		- philo->state->time_to_sleep - 5;
+// 	philo_log_think(philo);
+// 	if (time_to_think > 0)
+// 		msleep(min(time_to_think, max));
+// }
+
+void	__philo_think(t_philo *philo, int max)
+{
+	philo_log_think(philo);
+	(void)max;
+	msleep(min(1, max));
+}
+
+#endif
