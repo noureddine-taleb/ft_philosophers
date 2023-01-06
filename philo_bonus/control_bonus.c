@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   control_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noureddine <noureddine@student.42.fr>      +#+  +:+       +#+        */
+/*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 15:59:34 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/04 23:22:14 by noureddine       ###   ########.fr       */
+/*   Updated: 2023/01/06 15:16:54 by ntaleb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	philosopher(void *arg)
 	philo = arg;
 	state = philo->state;
 	meals_count = 0;
-	philo->ms_last_meal = philo->__last_activity = mstime();
+	philo->ms_last_meal = mstime();
 	while (1)
 	{
 		philo_eat(philo);
