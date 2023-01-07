@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   state.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noureddine <noureddine@student.42.fr>      +#+  +:+       +#+        */
+/*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 17:16:55 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/06 22:14:25 by noureddine       ###   ########.fr       */
+/*   Updated: 2023/01/07 11:55:04 by ntaleb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,21 @@
 # include "philo.h"
 #endif
 
+int	__get_fork(t_philo *philo, enum e_fork fork)
+{
+	if (!philo->forks[fork]->locked)
+	{
+		philo->forks[fork]->locked = 1;
+		philo_log_take_fork(philo);
+		return (1);
+	}
+	return (0);
+}
+
 /**
  * get couple forks atomicaly
  * 
 */
-
 void	get_forks(t_philo *philo)
 {
 	t_state	*state;
@@ -32,26 +42,15 @@ void	get_forks(t_philo *philo)
 	{
 		while (philo->forks[FORK_LEFT]->locked
 			|| philo->forks[FORK_RIGHT]->locked)
-		{
-			msleep(1);
-			check_death(philo);
-		}
+			msleep((check_death(philo), 1));
 		pthread_mutex_lock(&state->table_lock);
 		if (!philo->forks[FORK_LEFT]->locked
 			&& !philo->forks[FORK_RIGHT]->locked)
 		{
-			if (!philo->forks[FORK_LEFT]->locked)
-			{
-				philo->forks[FORK_LEFT]->locked = 1;
-				philo_log_take_fork(philo);
+			if (__get_fork(philo, FORK_LEFT))
 				success++;
-			}
-			if (!philo->forks[FORK_RIGHT]->locked)
-			{
-				philo->forks[FORK_RIGHT]->locked = 1;
-				philo_log_take_fork(philo);
+			if (__get_fork(philo, FORK_RIGHT))
 				success++;
-			}
 		}
 		pthread_mutex_unlock(&state->table_lock);
 		if (success == 2)

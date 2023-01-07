@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   init_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 13:18:02 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/05 12:16:19 by codespace        ###   ########.fr       */
+/*   Updated: 2023/01/07 11:55:51 by ntaleb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
-sem_t *_sem_open(char *path, int value)
+sem_t	*_sem_open(char *path, int value)
 {
 	sem_t	*sem;
 
