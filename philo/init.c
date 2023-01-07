@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noureddine <noureddine@student.42.fr>      +#+  +:+       +#+        */
+/*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 13:18:02 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/04 16:03:54 by noureddine       ###   ########.fr       */
+/*   Updated: 2023/01/07 11:45:36 by ntaleb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ t_philo	*init_philos(t_state *state, t_fork *forks)
 		philos[i].forks[FORK_RIGHT] = &forks[i];
 		philos[i].forks[FORK_LEFT] = &forks[
 			safe_index(i - 1, state->number_of_philosophers)];
-		philos[i].first_fork = i % 2;
 		philos[i].id = i + 1;
 		philos[i].ms_last_meal = 0;
 		philos[i].state = state;
