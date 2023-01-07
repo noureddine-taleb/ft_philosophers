@@ -6,7 +6,7 @@
 /*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 13:04:30 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/07 11:42:35 by ntaleb           ###   ########.fr       */
+/*   Updated: 2023/01/07 11:56:18 by ntaleb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ int				min(int a, int b);
 void			__perror(char *err);
 int				parse_int(char *str, int *i, int min);
 
-void 			get_forks(t_philo *philo);
-void 			put_forks(t_philo *philo);
+void			get_forks(t_philo *philo);
+void			put_forks(t_philo *philo);
 
 void			__philo_eat(t_philo *philo, int max);
 void			__philo_sleep(t_philo *philo, int max);
