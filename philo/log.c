@@ -6,7 +6,7 @@
 /*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 17:47:19 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/07 11:42:14 by ntaleb           ###   ########.fr       */
+/*   Updated: 2023/01/07 17:07:49 by ntaleb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@
 
 void	philo_log(t_philo *philo, char *event)
 {
-	printf("%ld %d %s\n", mstime(), philo->id, event);
+	unsigned long	t = mstime();
+	printf("%ld %d --last-act=%ld(rem=%d)-- %s\n", t, philo->id, t - philo->__last_activity, remaining(philo), event);
+	philo->__last_activity = t;
 }
 
 void	philo_log_sleep(t_philo *philo)

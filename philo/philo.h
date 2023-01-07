@@ -6,7 +6,7 @@
 /*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 13:04:30 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/07 16:58:06 by ntaleb           ###   ########.fr       */
+/*   Updated: 2023/01/07 17:07:56 by ntaleb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ typedef struct s_philo {
 	t_fork			*forks[2];
 	unsigned long	ms_last_meal;
 	t_state			*state;
+	// TODO: remove this
+	unsigned long __last_activity;
 }	t_philo;
 
 void			philo_log(t_philo *philo, char *event);
