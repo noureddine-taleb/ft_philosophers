@@ -6,7 +6,7 @@
 /*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 13:04:27 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/08 17:51:19 by ntaleb           ###   ########.fr       */
+/*   Updated: 2023/01/08 19:19:46 by ntaleb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int	main(int argc, char **argv)
 	t_forks	*forks;
 	t_philo	*philos;
 	int		i;
-	int		ret;
 
 	i = 0;
 	if (parse_args(argv, argc, &state) < 0)
@@ -34,8 +33,5 @@ int	main(int argc, char **argv)
 		philo_create(&philos[i], &philosopher, &philos[i]);
 		i++;
 	}
-	ret = wait_philos(philos, &state);
-	if (ret)
-		return (1);
-	return (0);
+	return (wait_philos(philos, &state));
 }

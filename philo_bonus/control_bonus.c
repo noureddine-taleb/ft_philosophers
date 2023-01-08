@@ -6,7 +6,7 @@
 /*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 15:59:34 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/06 15:16:54 by ntaleb           ###   ########.fr       */
+/*   Updated: 2023/01/08 19:19:55 by ntaleb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int	wait_philos(t_philo *philos, t_state *state)
 	while (i < state->number_of_philosophers)
 	{
 		if ((philo_join(philos, state)))
-			return (philo_kill_remaining(philos, state), -1);
+			return (philo_kill_remaining(philos, state), 1);
 		i++;
 	}
 	return (0);
