@@ -6,7 +6,7 @@
 /*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 16:10:00 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/06 18:17:54 by ntaleb           ###   ########.fr       */
+/*   Updated: 2023/01/08 11:55:06 by ntaleb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int	check_death(t_philo *philo)
 
 	rem = remaining(philo);
 	if (rem <= 0)
+		// TODO: exit is not allowed
 		exit((philo_log_death(philo), 1));
 	return (rem);
 }

@@ -6,7 +6,7 @@
 /*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 10:35:16 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/02 18:02:25 by ntaleb           ###   ########.fr       */
+/*   Updated: 2023/01/08 12:12:26 by ntaleb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,11 @@ int	safe_index(int i, int len)
 
 void	msleep(int msec)
 {
-	usleep(msec * 1000);
+	int	start;
+
+	start = mstime();
+	while ((int)mstime() - start < msec)
+		usleep(50);
 }
 
 int	min(int a, int b)
