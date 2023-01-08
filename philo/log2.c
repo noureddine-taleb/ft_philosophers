@@ -6,7 +6,7 @@
 /*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 17:24:02 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/02 18:03:00 by ntaleb           ###   ########.fr       */
+/*   Updated: 2023/01/08 18:24:02 by ntaleb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,4 +19,9 @@
 void	philo_log_death(t_philo *philo)
 {
 	philo_log(philo, "died");
+}
+
+void	philo_log_take_fork(t_philo *philo)
+{
+	philo_log(philo, "has taken a fork");
 }

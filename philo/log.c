@@ -6,7 +6,7 @@
 /*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 17:47:19 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/08 17:41:42 by ntaleb           ###   ########.fr       */
+/*   Updated: 2023/01/08 18:25:22 by ntaleb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	philo_log(t_philo *philo, char *event)
 }
 #endif
 
-
 void	philo_log_sleep(t_philo *philo)
 {
 	philo_log(philo, "is sleeping");
@@ -48,9 +47,4 @@ void	philo_log_think(t_philo *philo)
 void	philo_log_eat(t_philo *philo)
 {
 	philo_log(philo, "is eating");
-}
-
-void	philo_log_take_fork(t_philo *philo)
-{
-	philo_log(philo, "has taken a fork");
 }
