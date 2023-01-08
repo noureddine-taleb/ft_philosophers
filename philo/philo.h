@@ -6,7 +6,7 @@
 /*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 13:04:30 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/08 16:35:29 by ntaleb           ###   ########.fr       */
+/*   Updated: 2023/01/08 17:37:23 by ntaleb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_state {
 	int				min_eat;
 	int				died;
 	pthread_mutex_t	table_lock;
+	pthread_mutex_t	display_lock;
 }	t_state;
 
 typedef struct s_philo {

@@ -6,7 +6,7 @@
 /*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 13:18:02 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/08 15:21:07 by ntaleb           ###   ########.fr       */
+/*   Updated: 2023/01/08 17:38:12 by ntaleb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ t_philo	*init_philos(t_state *state, t_fork *forks)
 	i = 0;
 	philos = malloc(state->number_of_philosophers * sizeof(t_philo));
 	state->died = 0;
+	pthread_mutex_init(&state->table_lock, NULL);
 	while (i < state->number_of_philosophers)
 	{
 		philos[i].forks[FORK_RIGHT] = &forks[i];

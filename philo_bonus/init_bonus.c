@@ -6,7 +6,7 @@
 /*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 13:18:02 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/07 11:55:51 by ntaleb           ###   ########.fr       */
+/*   Updated: 2023/01/08 17:50:37 by ntaleb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,10 @@ t_philo	*init_philos(t_state *state, t_forks *forks)
 	t_philo	*philos;
 
 	i = 0;
+	state->display_lock = _sem_open(SEM_DISPLAY_NAME, 1);
+	if (state->display_lock == SEM_FAILED)
+		return (__perror("semaphore:" SEM_DISPLAY_NAME " already exists\n"),
+			NULL);
 	philos = malloc(state->number_of_philosophers * sizeof(t_philo));
 	while (i < state->number_of_philosophers)
 	{

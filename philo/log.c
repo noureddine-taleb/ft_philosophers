@@ -6,7 +6,7 @@
 /*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 17:47:19 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/07 11:42:14 by ntaleb           ###   ########.fr       */
+/*   Updated: 2023/01/08 17:41:42 by ntaleb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,24 @@
 # include "philo.h"
 #endif
 
+#ifdef BONUS
+
 void	philo_log(t_philo *philo, char *event)
 {
+	sem_wait(philo->state->display_lock);
 	printf("%ld %d %s\n", mstime(), philo->id, event);
+	sem_post(philo->state->display_lock);
 }
+#else
+
+void	philo_log(t_philo *philo, char *event)
+{
+	pthread_mutex_lock(&philo->state->display_lock);
+	printf("%ld %d %s\n", mstime(), philo->id, event);
+	pthread_mutex_unlock(&philo->state->display_lock);
+}
+#endif
+
 
 void	philo_log_sleep(t_philo *philo)
 {

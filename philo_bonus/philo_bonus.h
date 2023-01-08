@@ -6,7 +6,7 @@
 /*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 13:04:30 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/08 16:46:10 by ntaleb           ###   ########.fr       */
+/*   Updated: 2023/01/08 17:44:23 by ntaleb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 
 # define SEM_FORKS_NAME "forks_sem"
 # define SEM_TABLE_NAME "table_sem"
+# define SEM_DISPLAY_NAME "display_sem"
 
 typedef struct s_forks {
 	sem_t	*sem;
@@ -38,6 +39,7 @@ typedef struct s_state {
 	int				time_to_sleep;
 	int				min_eat;
 	sem_t			*table_lock;
+	sem_t			*display_lock;
 }	t_state;
 
 typedef struct s_philo {
