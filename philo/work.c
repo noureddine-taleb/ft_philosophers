@@ -6,7 +6,7 @@
 /*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 13:15:51 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/08 13:53:41 by ntaleb           ###   ########.fr       */
+/*   Updated: 2023/01/08 18:32:10 by ntaleb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,9 @@ void	philo_sleep(t_philo *philo)
 void	philo_think(t_philo *philo)
 {
 	int		rem;
-	int		time_to_think;
 
-	rem = remaining(philo);
-	time_to_think = rem / 2;
+	rem = remaining(philo) - 5;
 	philo_log_think(philo);
-	if (time_to_think > 9)
-		msleep(philo, time_to_think);
+	if (rem > 0)
+		msleep(philo, rem);
 }
