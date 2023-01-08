@@ -6,15 +6,14 @@
 /*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 17:16:55 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/06 18:48:31 by ntaleb           ###   ########.fr       */
+/*   Updated: 2023/01/08 17:09:41 by ntaleb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
 /**
- * get couple forks atomicaly.
- * 
+ * get couple forks ATOMICALLY.
 */
 void	get_forks(t_philo *philo)
 {
@@ -23,10 +22,7 @@ void	get_forks(t_philo *philo)
 	philo_log_take_fork(philo);
 	check_death(philo);
 	if (philo->state->number_of_philosophers == 1)
-	{
-		msleep(remaining(philo));
-		check_death(philo);
-	}
+		msleep(philo, -1);
 	sem_wait(philo->forks->sem);
 	philo_log_take_fork(philo);
 	sem_post(philo->state->table_lock);

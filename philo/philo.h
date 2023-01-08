@@ -6,7 +6,7 @@
 /*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 13:04:30 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/08 15:00:09 by ntaleb           ###   ########.fr       */
+/*   Updated: 2023/01/08 16:35:29 by ntaleb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ enum e_fork {
 };
 
 typedef struct s_fork {
-	int	locked;
+	pthread_mutex_t	lock;
 }	t_fork;
 
 typedef struct s_state {
@@ -46,6 +46,7 @@ typedef struct s_philo {
 	pthread_t		thread;
 	int				id;
 	t_fork			*forks[2];
+	enum e_fork		first_fork;
 	unsigned long	ms_last_meal;
 	t_state			*state;
 }	t_philo;
@@ -62,7 +63,7 @@ int				ft_atoi_err(const char *str, int *error);
 unsigned long	mstime(void);
 int				safe_index(int i, int len);
 int				remaining(t_philo *philo);
-int				msleep(t_philo *philo, int msec);
+int				msleep(t_philo *philo, unsigned long msec);
 int				check_death(t_philo *philo);
 int				min(int a, int b);
 void			__perror(char *err);

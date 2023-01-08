@@ -6,7 +6,7 @@
 /*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 13:04:30 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/07 11:56:18 by ntaleb           ###   ########.fr       */
+/*   Updated: 2023/01/08 16:46:10 by ntaleb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int				ft_atoi_err(const char *str, int *error);
 unsigned long	mstime(void);
 int				safe_index(int i, int len);
 int				remaining(t_philo *philo);
-void			msleep(int msec);
+int				msleep(t_philo *philo, unsigned long msec);
 int				check_death(t_philo *philo);
 int				min(int a, int b);
 void			__perror(char *err);

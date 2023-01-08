@@ -6,7 +6,7 @@
 /*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 17:16:55 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/08 14:32:56 by ntaleb           ###   ########.fr       */
+/*   Updated: 2023/01/08 17:00:45 by ntaleb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,56 +16,25 @@
 # include "philo.h"
 #endif
 
-int	__get_fork(t_philo *philo, enum e_fork fork)
+int	get_forks(t_philo *philo)
 {
-	if (!philo->forks[fork]->locked)
-	{
-		philo->forks[fork]->locked = 1;
-		philo_log_take_fork(philo);
-		return (1);
-	}
+	enum e_fork	first_fork;
+
+	first_fork = philo->first_fork;
+	pthread_mutex_lock(&philo->forks[first_fork]->lock);
+	philo_log_take_fork(philo);
+	if (philo->state->number_of_philosophers == 1)
+		return (msleep(philo, -1), -1);
+	pthread_mutex_lock(&philo->forks[!first_fork]->lock);
+	philo_log_take_fork(philo);
 	return (0);
 }
 
-/**
- * get couple forks atomicaly
- * 
-*/
-int	get_forks(t_philo *philo)
-{
-	t_state	*state;
-	int		success;
-
-	state = philo->state;
-	success = 0;
-	while (1)
-	{
-		while (philo->forks[FORK_LEFT]->locked
-			|| philo->forks[FORK_RIGHT]->locked
-			|| philo->forks[FORK_LEFT] == philo->forks[FORK_RIGHT])
-			if (msleep(philo, 1))
-				return (-1);
-		pthread_mutex_lock(&state->table_lock);
-		if (!philo->forks[FORK_LEFT]->locked
-			&& !philo->forks[FORK_RIGHT]->locked)
-		{
-			if (__get_fork(philo, FORK_LEFT))
-				success++;
-			if (__get_fork(philo, FORK_RIGHT))
-				success++;
-		}
-		pthread_mutex_unlock(&state->table_lock);
-		if (success == 2)
-			return (0);
-	}
-}
-
-/**
- * no need to acquire the lock,
- * since the thread has exclusive access to the forks
-*/
 void	put_forks(t_philo *philo)
 {
-	philo->forks[0]->locked = 0;
-	philo->forks[1]->locked = 0;
+	enum e_fork	first_fork;
+
+	first_fork = philo->first_fork;
+	pthread_mutex_unlock(&philo->forks[first_fork]->lock);
+	pthread_mutex_unlock(&philo->forks[!first_fork]->lock);
 }
