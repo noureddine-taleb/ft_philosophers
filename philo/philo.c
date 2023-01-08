@@ -6,7 +6,7 @@
 /*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 13:04:27 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/06 16:37:18 by ntaleb           ###   ########.fr       */
+/*   Updated: 2023/01/08 14:33:08 by ntaleb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,23 @@
 #else
 # include "philo.h"
 #endif
+
+int	wait_philos(t_philo	*philos)
+{
+	int		i;
+	void	*ret;
+	int		status;
+
+	i = 0;
+	status = 0;
+	while (i < philos->state->number_of_philosophers)
+	{
+		pthread_join(philos[i++].thread, &ret);
+		if (ret == PHILO_FAILURE)
+			status = 1;
+	}
+	return (status);
+}
 
 int	main(int argc, char **argv)
 {
@@ -33,9 +50,5 @@ int	main(int argc, char **argv)
 		pthread_create(&philos[i].thread, NULL, philosopher, &philos[i]);
 		i++;
 	}
-	i = 0;
-	while (i < state.number_of_philosophers)
-		pthread_detach(philos[i++].thread);
-	pthread_exit(NULL);
-	return (0);
+	return (wait_philos(philos));
 }

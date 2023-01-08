@@ -6,7 +6,7 @@
 /*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 13:04:30 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/08 14:59:50 by ntaleb           ###   ########.fr       */
+/*   Updated: 2023/01/08 15:00:09 by ntaleb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 # include <string.h>
 # include <sys/time.h>
 # include <unistd.h>
+
+# define PHILO_SUCCESS NULL
+# define PHILO_FAILURE ((void *)-1)
 
 enum e_fork {
 	FORK_LEFT,
@@ -35,6 +38,7 @@ typedef struct s_state {
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				min_eat;
+	int				died;
 	pthread_mutex_t	table_lock;
 }	t_state;
 
@@ -58,13 +62,13 @@ int				ft_atoi_err(const char *str, int *error);
 unsigned long	mstime(void);
 int				safe_index(int i, int len);
 int				remaining(t_philo *philo);
-void			msleep(int msec);
+int				msleep(t_philo *philo, int msec);
 int				check_death(t_philo *philo);
 int				min(int a, int b);
 void			__perror(char *err);
 int				parse_int(char *str, int *i, int min);
 
-void			get_forks(t_philo *philo);
+int				get_forks(t_philo *philo);
 void			put_forks(t_philo *philo);
 void			*philosopher(void *arg);
 

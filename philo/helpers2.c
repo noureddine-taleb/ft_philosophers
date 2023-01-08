@@ -6,7 +6,7 @@
 /*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 16:10:00 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/08 11:55:06 by ntaleb           ###   ########.fr       */
+/*   Updated: 2023/01/08 13:24:29 by ntaleb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,16 +58,32 @@ int	parse_args(char **argv, int argc, t_state *state)
 	return (0);
 }
 
+#ifdef BONUS
+
 int	check_death(t_philo *philo)
 {
 	long	rem;
 
 	rem = remaining(philo);
 	if (rem <= 0)
-		// TODO: exit is not allowed
-		exit((philo_log_death(philo), 1));
-	return (rem);
+		exit ((philo_log_death(philo), 1));
+	return (0);
 }
+#else
+
+int	check_death(t_philo *philo)
+{
+	long	rem;
+
+	rem = remaining(philo);
+	if (philo->state->died)
+		return (1);
+	if (rem <= 0)
+		return (philo_log_death(philo), philo->state->died = 1, 1);
+	return (0);
+}
+#endif
+
 
 int	remaining(t_philo *philo)
 {

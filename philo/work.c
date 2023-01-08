@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   work.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noureddine <noureddine@student.42.fr>      +#+  +:+       +#+        */
+/*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 13:15:51 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/04 16:49:18 by noureddine       ###   ########.fr       */
+/*   Updated: 2023/01/08 13:53:41 by ntaleb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,28 +18,29 @@
 
 void	philo_eat(t_philo *philo)
 {
-	int		rem;
-
-	check_death(philo);
 	get_forks(philo);
+	if (check_death(philo))
+		return ;
 	philo->ms_last_meal = mstime();
-	rem = check_death(philo);
-	__philo_eat(philo, rem);
+	philo_log_eat(philo);
+	msleep(philo, philo->state->time_to_eat);
 	put_forks(philo);
 }
 
 void	philo_sleep(t_philo *philo)
 {
-	int		rem;
-
-	rem = check_death(philo);
-	__philo_sleep(philo, rem);
+	philo_log_sleep(philo);
+	msleep(philo, philo->state->time_to_sleep);
 }
 
 void	philo_think(t_philo *philo)
 {
 	int		rem;
+	int		time_to_think;
 
-	rem = check_death(philo);
-	__philo_think(philo, rem);
+	rem = remaining(philo);
+	time_to_think = rem / 2;
+	philo_log_think(philo);
+	if (time_to_think > 9)
+		msleep(philo, time_to_think);
 }

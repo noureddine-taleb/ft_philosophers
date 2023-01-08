@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   control.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noureddine <noureddine@student.42.fr>      +#+  +:+       +#+        */
+/*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 16:42:57 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/04 20:43:30 by noureddine       ###   ########.fr       */
+/*   Updated: 2023/01/08 13:54:50 by ntaleb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,17 @@ void	*philosopher(void *arg)
 	while (1)
 	{
 		philo_eat(philo);
+		if (check_death(philo))
+			return (PHILO_FAILURE);
 		meals_count++;
 		if (state->min_eat != -1
 			&& meals_count >= state->min_eat)
 			return (NULL);
 		philo_sleep(philo);
+		if (check_death(philo))
+			return (PHILO_FAILURE);
 		philo_think(philo);
+		if (check_death(philo))
+			return (PHILO_FAILURE);
 	}
 }

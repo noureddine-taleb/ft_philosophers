@@ -6,7 +6,7 @@
 /*   By: ntaleb <ntaleb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 10:35:16 by ntaleb            #+#    #+#             */
-/*   Updated: 2023/01/08 12:12:26 by ntaleb           ###   ########.fr       */
+/*   Updated: 2023/01/08 13:49:47 by ntaleb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,18 @@ int	safe_index(int i, int len)
 	return (len - 1 - i);
 }
 
-void	msleep(int msec)
+int	msleep(t_philo *philo, int msec)
 {
 	int	start;
 
 	start = mstime();
 	while ((int)mstime() - start < msec)
+	{
+		if (check_death(philo))
+			return (-1);
 		usleep(50);
+	}
+	return (0);
 }
 
 int	min(int a, int b)
